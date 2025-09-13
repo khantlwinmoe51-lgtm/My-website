@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Gaming Store - Mobile Legends ပစ္စည်းများ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Noto Sans Myanmar', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .ml-blue { background: linear-gradient(45deg, #1e3a8a, #3b82f6); }
+        .ml-gold { background: linear-gradient(45deg, #f59e0b, #fbbf24); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 ml-blue rounded-lg flex items-center justify-center">
+                        <span class="text-2xl font-bold">ML</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">ML Gaming Store</h1>
+                        <p class="text-sm opacity-90">Mobile Legends ပစ္စည်းများ</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#home" class="hover:text-yellow-300 transition-colors">ပင်မစာမျက်နှာ</a>
+                    <a href="#products" class="hover:text-yellow-300 transition-colors">ပစ္စည်းများ</a>
+                    <a href="#about" class="hover:text-yellow-300 transition-colors">အကြောင်း</a>
+                    <a href="#contact" class="hover:text-yellow-300 transition-colors">ဆက်သွယ်ရန်</a>
+                </nav>
+                <div class="flex items-center space-x-3">
+                    <button class="bg-white text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                        🛒 <span id="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">Mobile Legends Gaming Store</h2>
+            <p class="text-xl mb-8 opacity-90">တရားဝင် Gaming Accessories နဲ့ Merchandise တွေ</p>
+            <button onclick="scrollToProducts()" class="ml-gold text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
+                ပစ္စည်းများကြည့်ရန် 🎮
+            </button>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-8 text-gray-800">အမျိုးအစားများ</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg card-hover cursor-pointer text-center" onclick="filterProducts('accessories')">
+                    <div class="text-4xl mb-3">🎧</div>
+                    <h4 class="font-semibold text-gray-800">Gaming Accessories</h4>
+                </div>
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg card-hover cursor-pointer text-center" onclick="filterProducts('merchandise')">
+                    <div class="text-4xl mb-3">👕</div>
+                    <h4 class="font-semibold text-gray-800">Merchandise</h4>
+                </div>
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg card-hover cursor-pointer text-center" onclick="filterProducts('diamonds')">
+                    <div class="text-4xl mb-3">💎</div>
+                    <h4 class="font-semibold text-gray-800">Diamonds</h4>
+                </div>
+                <div class="category-card bg-white p-6 rounded-xl shadow-lg card-hover cursor-pointer text-center" onclick="filterProducts('skins')">
+                    <div class="text-4xl mb-3">✨</div>
+                    <h4 class="font-semibold text-gray-800">Skin Codes</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">လူကြိုက်များသော ပစ္စည်းများ</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
+                <!-- Gaming Accessories -->
+                <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="accessories">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                        <span class="text-6xl">🎧</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">Gaming Headset Pro</h4>
+                        <p class="text-gray-600 mb-4">7.1 Surround Sound နဲ့ RGB Lighting</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-purple-600">၈၅,၀၀၀ ကျပ်</span>
+                            <button onclick="addToCart('Gaming Headset Pro', 85000)" class="ml-blue text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
+                                ဝယ်ယူရန်
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="accessories">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
+                        <span class="text-6xl">🖱️</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">Gaming Mouse RGB</h4>
+                        <p class="text-gray-600 mb-4">12000 DPI နဲ့ Programmable Buttons</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-purple-600">၄၅,၀၀၀ ကျပ်</span>
+                            <button onclick="addToCart('Gaming Mouse RGB', 45000)" class="ml-blue text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
+                                ဝယ်ယူရန်
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Merchandise -->
+                <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="merchandise">
+                    <div class="h-48 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+                        <span class="text-6xl">👕</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">ML Official T-Shirt</h4>
+                        <p class="text-gray-600 mb-4">Premium Cotton နဲ့ Official Design</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-purple-600">၂၅,၀၀၀ ကျပ်</span>
+                            <button onclick="addToCart('ML Official T-Shirt', 25000)" class="ml-blue text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
+                                ဝယ်ယူရန်
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diamonds -->
+                <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="diamonds">
+                    <div class="h-48 bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center">
+                        <span class="text-6xl">💎</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">1000 Diamonds</h4>
+                        <p class="text-gray-600 mb-4">တရားဝင် Diamond Top-up</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-purple-600">၃၀,၀၀၀ ကျပ်</span>
+                            <button onclick="buyDiamonds('1000 Diamonds', 30000)" class="ml-blue text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
+                                ဝယ်ယူရန်
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skin Codes -->
+                <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="skins">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
+                        <span class="text-6xl">✨</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">Epic Skin Code</h4>
+                        <p class="text-gray-600 mb-4">Random Epic Skin Code</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-purple-600">၁၅,၀၀၀ ကျပ်</span>
+                            <button onclick="addToCart('Epic Skin Code', 15000)" class="ml-blue text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
+                                ဝယ်ယူရန်
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="accessories">
+                    <div class="h-48 bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center">
+                        <span class="text-6xl">⌨️</span>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2">Mechanical Keyboard</h4>
+                        <p class="text-gray-600 mb-4">RGB Backlight နဲ့ Blue Switches</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-purple-600">၁၂၀,၀၀၀ ကျပ်</span>
+                            <button onclick="addToCart('Mechanical Keyboard', 120000)" class="ml-blue text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform">
+                                ဝယ်ယူရန်
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="text-3xl font-bold mb-8 text-gray-800">ကျွန်တော်တို့အကြောင်း</h3>
+                <p class="text-lg text-gray-600 mb-8">
+                    ML Gaming Store သည် Mobile Legends ကစားသူများအတွက် တရားဝင်ပစ္စည်းများကို ရောင်းချသော ယုံကြည်စိတ်ချရသော store ဖြစ်ပါတယ်။ 
+                    ကျွန်တော်တို့မှာ gaming accessories၊ official merchandise၊ diamonds နဲ့ skin codes တွေ ရရှိနိုင်ပါတယ်။
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">🛡️</div>
+                        <h4 class="font-semibold mb-2">တရားဝင်ပစ္စည်းများ</h4>
+                        <p class="text-gray-600">၁၀၀% တရားဝင်နဲ့ အရည်အသွေးမြင့်</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">🚚</div>
+                        <h4 class="font-semibold mb-2">မြန်ဆန်သော ပေးပို့မှု</h4>
+                        <p class="text-gray-600">တစ်နေ့အတွင်း ပေးပို့ခြင်း</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">💬</div>
+                        <h4 class="font-semibold mb-2">၂၄/၇ ပံ့ပိုးမှု</h4>
+                        <p class="text-gray-600">အချိန်မရွေး ဆက်သွယ်နိုင်ပါတယ်</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto">
+                <h3 class="text-3xl font-bold text-center mb-8 text-gray-800">ဆက်သွယ်ရန်</h3>
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">အမည်</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">ဖုန်းနံပါတ်</label>
+                            <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">မက်ဆေ့ချ်</label>
+                            <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full ml-gold text-white py-3 rounded-lg font-semibold hover:scale-105 transition-transform">
+                            မက်ဆေ့ချ်ပို့ရန်
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <div class="w-10 h-10 ml-blue rounded-lg flex items-center justify-center">
+                    <span class="text-lg font-bold">ML</span>
+                </div>
+                <span class="text-xl font-bold">ML Gaming Store</span>
+            </div>
+            <p class="opacity-90 mb-4">Mobile Legends ကစားသူများအတွက် အကောင်းဆုံး gaming store</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-yellow-300 transition-colors">Facebook</a>
+                <a href="#" class="hover:text-yellow-300 transition-colors">Telegram</a>
+                <a href="#" class="hover:text-yellow-300 transition-colors">Viber</a>
+            </div>
+            <p class="mt-4 text-sm opacity-75">© 2024 ML Gaming Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <h3 class="text-2xl font-bold mb-4">Shopping Cart</h3>
+            <div id="cart-items" class="space-y-3 mb-6">
+                <!-- Cart items will be added here -->
+            </div>
+            <div class="border-t pt-4">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xl font-bold">စုစုပေါင်း:</span>
+                    <span id="cart-total" class="text-2xl font-bold text-purple-600">၀ ကျပ်</span>
+                </div>
+                <div class="flex space-x-3">
+                    <button onclick="closeCart()" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold">
+                        ပိတ်ရန်
+                    </button>
+                    <button onclick="checkout()" class="flex-1 ml-gold text-white py-3 rounded-lg font-semibold">
+                        အော်ဒါမှာရန်
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game ID Modal -->
+    <div id="game-id-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">🎮</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Game ID ဖြည့်ပါ</h3>
+                <p class="text-gray-600" id="diamond-info">1000 Diamonds - ၃၀,၀၀၀ ကျပ်</p>
+            </div>
+            
+            <form id="game-id-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <span class="flex items-center">
+                            👤 Player ID
+                        </span>
+                    </label>
+                    <input type="text" id="player-id" placeholder="123456789" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <span class="flex items-center">
+                            🏷️ Zone ID
+                        </span>
+                    </label>
+                    <input type="text" id="zone-id" placeholder="1234" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" required>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <div class="flex items-start space-x-2">
+                        <span class="text-blue-500 mt-1">ℹ️</span>
+                        <div class="text-sm text-blue-700">
+                            <p class="font-medium mb-1">Game ID ရှာနည်း:</p>
+                            <p>Profile → Settings → Account → Game ID ကိုကြည့်ပါ</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-3 pt-4">
+                    <button type="button" onclick="closeGameIdModal()" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold">
+                        ပယ်ဖျက်ရန်
+                    </button>
+                    <button type="submit" class="flex-1 ml-gold text-white py-3 rounded-lg font-semibold">
+                        ငွေချေရန်
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">💳</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">ငွေချေမှုနည်းလမ်း</h3>
+                <p class="text-gray-600" id="payment-info">1000 Diamonds - ၃၀,၀၀၀ ကျပ်</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="text-center">
+                    <button onclick="selectPayment('wave')" class="payment-option border-2 border-purple-500 bg-purple-50 rounded-xl p-6 w-full transition-colors">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <span class="text-white font-bold text-2xl">W</span>
+                            </div>
+                            <p class="font-semibold text-lg">Wave Pay</p>
+                            <p class="text-sm text-gray-600 mt-1">09-761-542-701</p>
+                        </div>
+                    </button>
+                </div>
+                
+                <div id="payment-details" class="bg-gray-50 p-4 rounded-lg">
+                    <div class="text-center">
+                        <p class="font-semibold mb-2 text-blue-600">Wave Pay</p>
+                        <p class="text-sm text-gray-600 mb-4">ဖုန်းနံပါတ်: <span class="font-mono">09-761-542-701</span></p>
+                        <div class="bg-white p-4 rounded-lg border-2 border-dashed border-gray-300 mb-4">
+                            <p class="text-xs text-gray-500 mb-2">QR Code</p>
+                            <div class="w-32 h-32 bg-gray-200 rounded-lg mx-auto flex items-center justify-center">
+                                <span class="text-4xl">📱</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                            QR Code ကို scan လုပ်ပြီး <span class="font-bold text-purple-600" id="amount-to-pay">၃၀,၀၀၀ ကျပ်</span> ပေးပို့ပါ
+                        </p>
+                        
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
+                            <div class="flex items-start space-x-3">
+                                <span class="text-yellow-600 text-xl">📸</span>
+                                <div class="flex-1">
+                                    <p class="font-semibold text-yellow-800 mb-2">ပြေစာပို့ရန်</p>
+                                    <p class="text-sm text-yellow-700 mb-3">ငွေပေးပို့ပြီးရင် ပြေစာ screenshot ရိုက်ပြီး အောက်က button နှိပ်ပြီး ပို့ပေးပါ</p>
+                                    <button onclick="openReceiptUpload()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2 mx-auto">
+                                        <span>📤</span>
+                                        <span>ပြေစာပို့ရန်</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                            <div class="flex items-start space-x-3">
+                                <span class="text-green-600 text-xl">✅</span>
+                                <div class="flex-1">
+                                    <p class="font-semibold text-green-800 mb-2">ပြေစာပို့ပြီးပါပြီ</p>
+                                    <p class="text-sm text-green-700 mb-3">ပြေစာပို့ပြီးရင် ဆက်လုပ်နိုင်ပါပြီ</p>
+                                    <button onclick="continueProcess()" class="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2">
+                                        <span>➡️</span>
+                                        <span>ဆက်လုပ်ပါ</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-3 pt-4">
+                    <button onclick="closePaymentModal()" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold">
+                        ပယ်ဖျက်ရန်
+                    </button>
+                    <button onclick="confirmPayment()" class="flex-1 bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">
+                        အတည်ပြုပါ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Receipt Upload Modal -->
+    <div id="receipt-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">📸</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">ပြေစာ Upload လုပ်ပါ</h3>
+                <p class="text-gray-600">ငွေပေးပို့ပြီးသော ပြေစာ screenshot ကို upload လုပ်ပါ</p>
+            </div>
+            
+            <form id="receipt-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <span class="flex items-center">
+                            🖼️ ပြေစာပုံ
+                        </span>
+                    </label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-yellow-400 transition-colors cursor-pointer" onclick="document.getElementById('receipt-file').click()">
+                        <div id="upload-area">
+                            <div class="text-4xl mb-2">📁</div>
+                            <p class="text-gray-600 mb-2">ပုံရွေးချယ်ရန် နှိပ်ပါ</p>
+                            <p class="text-xs text-gray-500">PNG, JPG, JPEG files သာ</p>
+                        </div>
+                        <div id="preview-area" class="hidden">
+                            <img id="preview-image" class="max-w-full h-32 object-contain mx-auto rounded-lg mb-2" alt="Preview">
+                            <p class="text-sm text-green-600">✅ ပုံရွေးချယ်ပြီးပါပြီ</p>
+                        </div>
+                    </div>
+                    <input type="file" id="receipt-file" accept="image/*" class="hidden" onchange="previewImage(this)">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <span class="flex items-center">
+                            💬 မှတ်ချက် (ရွေးချယ်ခွင့်ရှိ)
+                        </span>
+                    </label>
+                    <textarea id="receipt-note" rows="3" placeholder="ထပ်ဆောင်း မှတ်ချက်များ..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"></textarea>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <div class="flex items-start space-x-2">
+                        <span class="text-blue-500 mt-1">ℹ️</span>
+                        <div class="text-sm text-blue-700">
+                            <p class="font-medium mb-1">အရေးကြီးသော အချက်များ:</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>ပြေစာမှာ ငွေပမာණ ရှင်းရှင်းလင်းလင်း မြင်ရပါမည်</li>
+                                <li>လက်ခံသူ ဖုန်းနံပါတ် မြင်ရပါမည်</li>
+                                <li>ရက်စွဲနဲ့ အချိန် မြင်ရပါမည်</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-3 pt-4">
+                    <button type="button" onclick="closeReceiptModal()" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold">
+                        ပယ်ဖျက်ရန်
+                    </button>
+                    <button type="submit" class="flex-1 bg-yellow-500 text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                        ပြေစာပို့ရန်
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let cartTotal = 0;
+        let currentDiamond = { name: '', price: 0 };
+
+        function scrollToProducts() {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            cartTotal += price;
+            updateCartDisplay();
+            showNotification(`${name} ကို cart ထဲထည့်ပြီးပါပြီ!`);
+        }
+
+        function buyDiamonds(name, price) {
+            currentDiamond = { name, price };
+            document.getElementById('diamond-info').textContent = `${name} - ${price.toLocaleString()} ကျပ်`;
+            document.getElementById('game-id-modal').classList.remove('hidden');
+            document.getElementById('game-id-modal').classList.add('flex');
+        }
+
+        function closeGameIdModal() {
+            document.getElementById('game-id-modal').classList.add('hidden');
+            document.getElementById('game-id-modal').classList.remove('flex');
+            document.getElementById('game-id-form').reset();
+        }
+
+        function closePaymentModal() {
+            document.getElementById('payment-modal').classList.add('hidden');
+            document.getElementById('payment-modal').classList.remove('flex');
+        }
+
+        function selectPayment(method) {
+            // Show payment details
+            document.getElementById('amount-to-pay').textContent = `${currentDiamond.price.toLocaleString()} ကျပ်`;
+        }
+
+        function openReceiptUpload() {
+            document.getElementById('receipt-modal').classList.remove('hidden');
+            document.getElementById('receipt-modal').classList.add('flex');
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receipt-modal').classList.add('hidden');
+            document.getElementById('receipt-modal').classList.remove('flex');
+            document.getElementById('receipt-form').reset();
+            document.getElementById('upload-area').classList.remove('hidden');
+            document.getElementById('preview-area').classList.add('hidden');
+        }
+
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview-image').src = e.target.result;
+                    document.getElementById('upload-area').classList.add('hidden');
+                    document.getElementById('preview-area').classList.remove('hidden');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function continueProcess() {
+            alert('အောင်မြင်ပါတယ်! 🎉\n\nDiamond ဖြည့်ပေးရန် ခေတ္တစောင့်ဆိုင်းပေးပါ...\n\nကျေးဇူးတင်ပါတယ်!');
+            
+            // Close all modals
+            closePaymentModal();
+            closeGameIdModal();
+            
+            // Redirect to home page after 2 seconds
+            setTimeout(() => {
+                document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        }
+
+        function confirmPayment() {
+            const playerId = document.getElementById('player-id').value;
+            const zoneId = document.getElementById('zone-id').value;
+            
+            alert(`အောင်မြင်ပါတယ်! 🎉\n\n${currentDiamond.name} ကို Player ID: ${playerId} (${zoneId}) သို့ Diamond ဖြည့်ပေးရန် ခေတ္တသောင့်ပါ!\n\nကျေးဇူးတင်ပါတယ်!`);
+            
+            closePaymentModal();
+            closeGameIdModal();
+        }
+
+        function updateCartDisplay() {
+            document.getElementById('cart-count').textContent = cart.length;
+            
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            
+            cart.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'flex justify-between items-center bg-gray-50 p-3 rounded-lg';
+                itemDiv.innerHTML = `
+                    <span>${item.name}</span>
+                    <div class="flex items-center space-x-2">
+                        <span class="font-semibold">${item.price.toLocaleString()} ကျပ်</span>
+                        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700">
+                            ✕
+                        </button>
+                    </div>
+                `;
+                cartItems.appendChild(itemDiv);
+            });
+            
+            document.getElementById('cart-total').textContent = `${cartTotal.toLocaleString()} ကျပ်`;
+        }
+
+        function removeFromCart(index) {
+            cartTotal -= cart[index].price;
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        function openCart() {
+            document.getElementById('cart-modal').classList.remove('hidden');
+            document.getElementById('cart-modal').classList.add('flex');
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').classList.add('hidden');
+            document.getElementById('cart-modal').classList.remove('flex');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Cart ထဲမှာ ပစ္စည်းမရှိပါ!');
+                return;
+            }
+            
+            alert(`အော်ဒါအောင်မြင်ပါတယ်! စုစုပေါင်း: ${cartTotal.toLocaleString()} ကျပ်\n\nကျွန်တော်တို့က မကြာခင် ဆက်သွယ်ပါမယ်!`);
+            cart = [];
+            cartTotal = 0;
+            updateCartDisplay();
+            closeCart();
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Cart button click handler
+        document.querySelector('button[class*="bg-white"]').addEventListener('click', openCart);
+
+        // Game ID form handler
+        document.getElementById('game-id-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const playerId = document.getElementById('player-id').value;
+            const zoneId = document.getElementById('zone-id').value;
+            
+            if (playerId && zoneId) {
+                // Close game ID modal and open payment modal
+                document.getElementById('game-id-modal').classList.add('hidden');
+                document.getElementById('game-id-modal').classList.remove('flex');
+                
+                // Open payment modal
+                document.getElementById('payment-info').textContent = `${currentDiamond.name} - ${currentDiamond.price.toLocaleString()} ကျပ်`;
+                document.getElementById('payment-modal').classList.remove('hidden');
+                document.getElementById('payment-modal').classList.add('flex');
+            }
+        });
+
+        // Contact form handler
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('မက်ဆေ့ချ်ပို့ပြီးပါပြီ! ကျွန်တော်တို့က မကြာခင် ပြန်ဆက်သွယ်ပါမယ်!');
+            this.reset();
+        });
+
+        // Receipt form handler
+        document.getElementById('receipt-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('receipt-file');
+            const note = document.getElementById('receipt-note').value;
+            
+            if (!fileInput.files || !fileInput.files[0]) {
+                alert('ပြေစာပုံ ရွေးချယ်ပေးပါ!');
+                return;
+            }
+            
+            alert('ပြေစာ upload အောင်မြင်ပါတယ်! 📸\n\nကျွန်တော်တို့က ပြေစာစစ်ဆေးပြီး Diamond ဖြည့်ပေးပါမယ်!\n\nကျေးဇူးတင်ပါတယ်!');
+            closeReceiptModal();
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e6cb10e6518967',t:'MTc1Nzc1NzU4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
